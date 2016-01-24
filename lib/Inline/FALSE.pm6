@@ -225,6 +225,7 @@ L<http://strlen.com/false/false.txt>).
 =head1 BUGS AND LIMITATIONS
 
 Inline assembly is not supported. FALSE programs that rely on integer overflow
-may not work as expected.
+may not work as intended. FALSE programs that perform pointer arithmetic may
+not work as intended.
 
 =end pod
