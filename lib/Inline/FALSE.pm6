@@ -1,6 +1,27 @@
 use v6.c;
 
+=begin pod
+
+=head1 NAME
+
+Inline::FALSE - embed FALSE code in Perl 6 code
+
+=head1 SYNOPSIS
+
+    use Inline::FALSE;
+
+    sub square($z) {
+        false('z;z;*z:', :$z);
+    }
+
+    say square(5); # 25
+
+=head1 DESCRIPTION
+
+=end pod
+
 module Inline::FALSE {
+    #| FALSE grammar.
     our grammar Grammar {
         rule TOP { <ws> $<stmts>=<stmt>* }
 
@@ -35,6 +56,7 @@ module Inline::FALSE {
         }
     }
 
+    #| FALSE grammar actions.
     our class Actions {
         method TOP($/) {
             my @stmts = $<stmts>>>.made;
@@ -186,7 +208,23 @@ module Inline::FALSE {
         };
     }
 
+    #| Executes a FALSE program, setting global variables. When the FALSE
+    #| program halts, the value of the C<z> variable is returned.
     sub false(Str:D $code, *%globals) is export {
         compile($code)(|%globals);
     }
 }
+
+=begin pod
+
+=head1 BUGS AND LIMITATIONS
+
+Inline assembly is not supported. FALSE programs that rely on integer overflow
+may not work as expected.
+
+=head1 SEE ALSO
+
+FALSE language specification (available on
+L<http://strlen.com/false/false.txt>).
+
+=end pod
