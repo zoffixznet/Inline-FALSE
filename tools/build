@@ -1,0 +1,2 @@
+#!/usr/bin/env zsh
+perl6 --doc lib/Inline/FALSE.pm6 > README

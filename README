@@ -1,0 +1,37 @@
+NAME
+
+Inline::FALSE - embed FALSE code in Perl 6 code
+
+SYNOPSIS
+
+    use Inline::FALSE;
+    
+    sub square($z) {
+        false('z;z;*z:', :$z);
+    }
+    
+    say square(5); # 25
+
+DESCRIPTION
+
+class Inline::FALSE::Grammar
+FALSE grammar.
+
+class Inline::FALSE::Actions
+FALSE grammar actions.
+
+sub false(
+	Str:D $code, 
+	*%globals
+)
+Executes a FALSE program, setting global variables. When the FALSE program halts, the value of the C<z> variable is returned.
+
+SEE ALSO
+
+FALSE language specification (available on
+http://strlen.com/false/false.txt).
+
+BUGS AND LIMITATIONS
+
+Inline assembly is not supported. FALSE programs that rely on integer
+overflow may not work as expected.
