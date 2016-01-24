@@ -180,8 +180,7 @@ module Inline::FALSE {
 
     our sub compile(Str:D $text) {
         my &main = Grammar.parse($text, actions => Actions).made;
-        -> {
-            my %globals;
+        -> *%globals {
             &main([], %globals);
             %globals<z>;
         };
