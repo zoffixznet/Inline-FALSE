@@ -88,4 +88,6 @@ test(q:to/EOF/, 'Happy numbers: 1 7 10 13 19 23 28 31');
 %%
 EOF
 
+is(Inline::FALSE::compile('1z:')(), 1);
+
 done-testing;
