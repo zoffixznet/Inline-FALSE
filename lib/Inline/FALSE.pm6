@@ -180,9 +180,13 @@ module Inline::FALSE {
 
     our sub compile(Str:D $text) {
         my &main = Grammar.parse($text, actions => Actions).made;
-        -> *%globals {
+        -> *%globals is copy {
             &main([], %globals);
             %globals<z>;
         };
+    }
+
+    sub false(Str:D $code, *%globals) is export {
+        compile($code)(|%globals);
     }
 }
